@@ -1,0 +1,139 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{graphicx}
+\usepackage[margin=3cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{amsmath,amssymb,amsfonts,mathrsfs}
+
+\lstset{
+    breaklines=true,
+    numbers=left,
+    frame=single
+    }
+\newcommand{\E}{\mathbb{E}}
+
+\pagestyle{fancy}
+\fancyhead[L]{NOM(S) et Prénom(s) ---}
+\fancyfoot{}
+
+\begin{document}
+
+\begin{center}
+    {\Huge Théorème Central Limite et Applications}
+\end{center}
+
+\section{Plus l'échantillon est grand, moins la moyenne varie}
+\subsection{Théorie}
+
+\begin{enumerate}
+    \item \begin{align*}
+          \E(\bar{X}_{n})&= \E\left(\frac{1}{n}\sum_{i=1}^{n}X_{i}\right)\\
+          &=
+          \end{align*}
+    \item \begin{align*}
+          Var(\bar{X}_{n})&= Var\left(\frac{1}{n}\sum_{i=1}^{n}X_{i}\right)\\
+          &=\\
+          \sigma(\bar{X}_{n})&= 
+          \end{align*}
+    \item \begin{align*}
+          \E(\bar{Z}_{n})&= \E\left(\sqrt{n}\frac{\bar{X}_{n}-\mu}{\sigma}\right)\\
+          &=
+          \end{align*}
+          \begin{align*}
+          Var(\bar{Z}_{n})&= Var\left(\sqrt{n}\frac{\bar{X}_{n}-\mu}{\sigma}\right) \\
+          &=\\
+          \end{align*}
+\end{enumerate}
+
+\subsection{Application}
+
+\begin{enumerate}
+    \setcounter{enumi}{2}
+    \item
+        \begin{figure}[h!] %Représentation graphique de la distribution des tailles des clientes
+            \centering
+            %\includegraphics[width=8cm]{image.png}
+        \end{figure}
+        
+        \begin{description}
+            \item[Moyenne empirique $\bar{x}_{n}$] 
+            \item[Ecart-type $s$]
+        \end{description}
+        On ne retrouve pas exactement 162.5 et $\sqrt{2}$ car 
+        
+        
+    \item % Copier-coller les moyennes empiriques des enquêteurs
+        \begin{lstlisting}[numbers=none] 
+        \end{lstlisting}
+        
+        
+    \item
+        \begin{figure}[h!] %Représentation graphique de la distribution des moyennes (ajoutée au premier graphique)
+        \centering
+            %\includegraphics[width=8cm]{image.png}
+        \end{figure}
+    
+    % Commenter les résultats
+    
+    \item La dispersion de la moyenne est plus petite que la dispersion de la population ...
+    
+    
+    
+    \item Cette enquête a été/n'a pas été réalisée en France car ...
+    
+\end{enumerate}
+
+\newpage
+\section{TCL}
+
+\begin{enumerate}
+    \item 
+        \begin{figure}[h!] %Histogramme de l'échantillon
+            \centering
+            %\includegraphics[width=8cm]{image.png}
+        \end{figure}
+    
+    
+    \item % Copier-coller les durées de vie moyennes des succursales
+        \begin{lstlisting}[numbers=none] 
+        \end{lstlisting}
+    
+    
+    \item 
+        \begin{figure}[h!] %Histogramme des moyennes
+            \centering
+            %\includegraphics[width=8cm]{image.png}
+        \end{figure}
+    
+    \begin{description}
+        \item[Moyenne] 
+        \item[Ecart-type de la moyenne]
+    \end{description}
+    %Commenter
+    
+    
+    \item 
+         \begin{figure}[h!] %Histogramme des nouveaux résultats avec 100 ampoules
+             \centering
+             %\includegraphics[width=8cm]{image.png}
+         \end{figure}
+        
+    
+    \item %Interprétation avec le TCL
+    
+    
+    \item Question BONUS
+\end{enumerate}
+
+\newpage
+\appendix
+
+\section{Code}
+%\lstinputlisting[language=Matlab]{sourceTP.m}
+
+
+\end{document}

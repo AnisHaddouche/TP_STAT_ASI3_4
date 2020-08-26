@@ -1,0 +1,117 @@
+\documentclass[12pt,paper=a4,answers]{exam}
+\RequirePackage{amssymb, amsfonts, amsmath, latexsym, verbatim, xspace, setspace,graphicx,color}
+
+\usepackage{etoolbox}% opener for can of worms
+\usepackage[]{listings}
+%\newcommand{\mysection}[1]% #1 = title
+%{\stepcounter{section}%
+%\setcounter{question}{0}%
+%\fullwidth{\smallskip\textbf{\large #1}}}
+
+
+\patchcmd{\questions}{10.}{\thequestion.}{}{}% fix left margin
+\extraheadheight{50pt}
+%\extrafootheight{-70pt}
+\firstpageheader{\includegraphics[width=100pt]{logoinsa} \\ L. Noiret, \\A. Rogozan}
+{\Large \bf ~~TP \\ 
+	Th\'eor\`eme Central Limite \\ et applications }
+{\includegraphics[width=90pt]{logoasi} \\ $ 3^{\mbox{\footnotesize
+			e}}$ ann\'ee}
+\runningheader{ASI3}{Stats}{}
+\headrule
+\footer{}{}{p.\thepage/\numpages}
+\begin{document}Dans ce TP, nous allons mettre en pratique le {\color{blue} th\'eor\`eme central limite} (TCL) et regarder les caract\'eristiques de la distribution de la moyenne empirique. Le TCL est particuli\`erement important pour la mise en oeuvre de tests statistiques et la construction d'intervalles de confiance de la moyenne.\\
+Il nous dit que la distribution de la distribution moyenne empirique de n'importe quelle suite de variables ale\'atoires iid (ind\'ependantes et identiquement distribut\'ees) suit une loi gaussienne lorsque la taille de l'\'echantillon est suffisamment grande.\\
+\vspace{1ex}
+
+\section{Plus l'\'echantillon est grand, moins la moyenne varie}
+La moyenne est un indicateur de tendance central d'une distribution. Elle est donc souvent utilis\'ee dans les tests statistiques afin de comparer deux populations. 
+\subsection*{}
+ Soient X$_1$..X$_n$ une suite de variables al\'eatoires i.i.d. de moyenne $\mu$ et de variance $\sigma^2$. On consid\`ere la statistique suivante (estimateur empirique de la moyenne) $$\bar{X}_n = \frac{1}{n} \sum_{i=1}^n X_i$$.
+\setcounter{question}{1}
+  \begin{questions}  
+    \question Donner l'esp\'erance math\'ematique de $\bar{X}_n$ en fonction de $\mu$.
+    \question Donner la variance de $\bar{X}_n$ en fonction de $\sigma^2$. En d\'eduire l'\'ecart type de $\bar{X}_n$. 
+    \question En d\'eduire l'esp\'erance et la variance de $\bar{Z}_n=\sqrt{n} \frac{\bar{X}_n-\mu}{\sigma}$	 
+   \end{questions}
+  \vspace{2ex} 
+ \textbf{Rappels :} 
+  \begin{itemize}
+	\item $\mathbb{E}(aX+b) = a\mathbb{E}(X)+b$ \vspace{0.1cm}
+	\item $Var(aX+b)=a^2Var(X)$\vspace{0.1cm}
+	\item $\mathbb{E}(X_1+X_2) = \mathbb{E}(X_1)+\mathbb{E}(X_2)$\vspace{0.1cm}
+	\item$Var(X_1+X_2)=Var(X_1)+Var(X_2)+Cov(X_1,X_2)$\vspace{0.1cm}
+	\item si $X_1$ et $X_2$ sont ind\'ependantes, $Var(X_1+X_2)=Var(X_1)+Var(X_2)$.
+\end{itemize}  
+%Remarque : Une {\color{blue} variable centr\'ee r\'eduite} est une variable qui a \'et\'e transform\'ee de fa\c con \`a ce que son d'esp\'erance soit 0 et son \'ecart-type 1. Dans notre exemple, $\bar{Z}_n$ est la version centr\'ee r\'eduite de $\bar{X}_n$. De nombreuses techniques du machine learning (ACP, SVM, r\'eseau de neurones...) n\'ecessitent de centrer (enlever l'esp\'erance) r\'eduire (diviser par l'\'ecart type) les variables au pr\'ealable.
+% \begin{questions}  
+%	\question Cr\'eer une fonction matlab qui prend en entr\'ee un vecteur de donn\'es, et donne en sortie le vecteur de donn\'ees centr\'ees reduites, ainsi que la moyenne et l\'ecart type des donn\'ees originales : \\
+%	\begin{lstlisting}[language=Matlab]
+%[donnees_centrees_reduites,moyenne,ecart_type]=fct_normalise(donnees)
+%	\end{lstlisting}
+%\end{questions}
+\subsection*{Application}
+%\section*{}
+%La variance de la moyenne empirique est $Var(\bar{X}_n)=\frac{1}{n}Var(X_i)$. Dans cet exercice, nous allons voir ce que cela signifie concr\`etement.\\
+Une entreprise de v\^etement am\'ericaine \textit{MadeInC} souhaite r\'ealiser une enqu\^ete sur la taille des fran\c caises afin d'ajuster la taille de ces v\^etements aux clientes de l'hexagone. Pour cela elle recrute 50 enqu\^eteurs dans toute la France afin de mesurer des femmes. 
+\begin{questions}  
+	\setcounter{question}{2}
+    \question On sait (via une enqu\^ete secr\`etement r\'ealis\'ee par un concurrent) que la taille des clientes suit une loi normale de moyenne 162.5 cm et de variance 2. Simuler  une population de 1000 clientes (fonction \textit{normrnd}), et repr\'esenter leur distribution (tracer la densité). Calculer la moyenne empirique $\bar{x}_n$ et l'\'ecart type empirique $s$ de votre population. Pourquoi ne retrouvez-vous pas exactement 162.5 et $\sqrt{2}$?
+    \question Chaque enqu\^eteurs mesure $n =$ 30 femmes. Simuler les r\'esultats des 50 enqu\^eteurs. Calculer la taille moyenne empirique ($\bar{x}_n$) obtenue par chaque enqu\^eteur. Vous venez de cr\'eer un \'echantillon de 50 moyennes de tailles.% (r\'ealisation de $\bar{X}_{n1}\cdots \bar{X}_{n50}$\footnote{On note avec une majuscule les variables al\'eatoires ($\bar{X}_n$), et avec une minuscule la r\'ealisation de variables al\'eatoires sur les donn\'ees ($\bar{x}_{n}$)}. On note $\bar{X}_n$ la variable al\'eatoire ) }) mesur\'ees sur 30 personnes.  
+    \question Tracer la distribution des moyennes. Commenter les r\'esultats en les comparant avec le graphique précédent.
+    \question Comment expliqueriez-vous \`a vos parents (avec des mots), le fait que la dispersion de la moyenne est plus petite que la dispersion de la population?  
+ %   \question Quelle est la probabilit\'e qu'une femme mesure (voir fonction \textit{normcdf}):
+    %	\begin{itemize}
+    	%	\item exactement 168 cm?
+    	%	\item moins de 160 cm?
+    	%	\item plus de 165 cm?
+    	%	\item entre 158 cm et 164 cm?
+    	%	\end{itemize}
+
+%    \question Quelle est la probabilit\'e qu'un enqu\^eteur trouve une taille moyenne inf\'erieure \`a 160cm?
+   %    	\begin{itemize}
+   % 	\item inf\'erieure \`a 160cm?
+   % 	\item superieure \`a 165cm
+    %\end{itemize}
+     
+	%\question Donner un intervalle o\`u se trouve 95\% des femmes de la population? Y-a-t-il une seule solution? (voir fonction \textit{norminv})
+
+	%Un des enqu\^eteurs engag\'e par \textit{MadInC} est un doctorant en primatologie. Un peu \'etourdi, s\^urement par le manque de sommeil, il n'a pas  
+
+
+
+ 	\question Un des enqu\^eteurs de \textit{MacInC} est un peu \'etourdi (ou mal organis\'e). Il a r\'ealis\'e des enqu\^etes dans diff\'erents pays, mais il a oubli\'e d'inscrire le pays associ\'e \`a chaque enqu\^ete. Il trouve un fichier avec 50 mesures. La moyenne des donn\'ees de ce fichier est 164. On suppose que la variance de la taille est la m\^eme dans tous les pays et vaut 2. Cette enqu\^ete a-t-elle \'et\'e r\'ealis\'ee en France? 
+ 	      
+   \end{questions}
+   
+ \section{TCL}
+ L'entreprise d'ampoules Neaugreen  souhaite estimer la dur\'ee de vie de nouvelles ampoules grand luxe en cristal \`a 45 euros l'unit\'e. Pour cela, elle demande \`a 200 de ses succursales de r\'ealiser des tests d'usure. Dans chaque succursale, les employ\'es doivent maintenir $n =$ 5 ampoules allum\'ees en permanence et enregistrer la dur\'ee de vie de chaque ampoule. A l'issue de l'enqu\^ete, le charg\'e d\'etudes statistiques analyse  les r\'esultats. Cette enqu\^ete a montr\'e que la dur\'ee de vie des ampoules suivent une  loi exponentielle de param\`etre $\lambda = 5$ correspondant à une dur\'ee de vie moyenne de $\frac{1}{\lambda } = 0,2$ ann\'ee (2,4 mois) et une variance variance $\frac{1}{\lambda ^2}$ de 0,04 ann\'ees. 
+ \begin{questions}  
+ \question Simuler un \'echantillon de 1000 ampoules suivant une loi $\mathcal{E}(5)$ (fonction \textit{exprnd}, attention le param\`etre attendu dans Matlab est la moyenne et non $\lambda$) et afficher l'histogramme.
+ \question Simuler les r\'esultats des 200 succursales (simulation n = 5 ampoules/succursale). Calculer la dur\'ee de vie moyenne de chaque succursale ($\bar{x}_{n}^1,...,\bar{x}_{n}^{200}$). 
+ \question Afficher l'histogramme de l'\'echantillon des moyennes. Calculer la moyenne et l'\'ecart-type de la moyenne. Commenter.
+  \question Le charg\'e d\'etude statistiques est un peu \'etonn\'e par la forme de l'histogramme obtenu, et demande aux 200 succursales de refaire les tests, mais cette fois avec 100 ampoules. R\'ep\'etez l'exp\'erience et visualiser les r\'esultats à l'aide d'un histogramme. 
+  \question Interpr\^eter les r\'esultats de simulation \`a l'aide du th\'eor\`eme central limite. 
+ \question question BONUS : Une ampoule LED \`a une dur\'ee de vie moyenne de 6 ans (distribution exponentielle). A votre avis, la dur\'ee de vie moyenne des ampoules Neaugreen est-elle diff\'erente des ampoules LED?
+\begin{questions}
+\question Quelle est distribution de $\frac{\bar{X}_n-\mu}{\frac{S}{\sqrt{n}}}$?\\
+  \textbf{Rappels :} 
+  \begin{itemize}
+  \item estimateur de la variance : $S^2 = \frac{1}{n-1}\sum(X_i-\bar{X})^2$
+  \item $(n-1)\frac{S^2}{\sigma^2}$ suit une loi du Chi deux \`a $n-1$ degr\'e de libert\'e $\mathcal{X}^2(n-1)$
+  \item Soit Z une variable gaussienne $\mathcal{N}(0,1)$ et U une variable $\mathcal{X}^2(k)$, Z et U ind\'ependantes. Alors $\frac{Z}{\sqrt{\frac{U}{k}}}$ suit une loi de student \`a n$k$ degr\'es de libert\'e.
+  \end{itemize}
+  \question Quelle est la probabilite qu'une ampoule Neaugreen ait une dur\'ee de vie moyenne :
+    	\begin{itemize}
+ 	\item inf\'erieure \`a  1 mois?
+	\item superieure \`a 12 mois
+   \end{itemize}
+     
+\question Donner un intervalle o\`u se trouve 95\% des dur\'ee de vie moyennes? Y-a-t-il une seule solution? 
+\question Conclure.	 
+  \end{questions}
+\end{questions}
+
+
+ 
+\end{document}
